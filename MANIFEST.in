@@ -1,1 +1,1 @@
-global-include *.py
+recursive-include examples *
