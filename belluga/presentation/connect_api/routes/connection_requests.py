@@ -5,7 +5,7 @@ from fastapi_utils.inferring_router import InferringRouter
 from belluga.presentation.public_api.contracts.module_router import ModuleRouter
 from belluga.infrastructure.dal.contracts.filter_object import FilterObject
 
-from application.common.models import (
+from belluga.application.common.models import (
     ResponseModel,
     ErrorResponseModel
 )
