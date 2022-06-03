@@ -5,7 +5,7 @@ import belluga
 from belluga import presentation
 from belluga.presentation import connect_api
 setup(name='belluga',
-version='0.4',
+version='0.5',
 description='Testing installation of Package',
 url='#',
 author='auth',
