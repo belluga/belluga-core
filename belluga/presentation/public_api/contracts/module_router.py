@@ -20,8 +20,8 @@ class ModuleRouter(ABC):
     def router(self) -> InferringRouter:
         ...
 
-    def __init__(self):
-        self.connection = BellugaConnectFactory.get_client()
+    def __init__(self, connection: BellugaConnectFactory):
+        self.connection = connection
         self.tags = ModuleRouter.tags
         self.prefix = ModuleRouter.prefix
 

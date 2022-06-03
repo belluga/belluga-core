@@ -1,4 +1,3 @@
-from decouple import config
 import motor.motor_asyncio as motor
 from belluga.infrastructure.dal.dao.mongodb.connection_request_mongodb import ConnectionRequestMongoDB
 from belluga.infrastructure.dal.contracts.belluga_connect import BellugaConnect
@@ -7,8 +6,8 @@ from belluga.infrastructure.dal.contracts.filter_object import FilterObject
 
 class MongoDBDao(BellugaConnect):
 
-    def __init__(self):
-        self._client = motor.AsyncIOMotorClient(config("MONGO_DETAILS"))
+    def __init__(self, connection_string: str):
+        self._client = motor.AsyncIOMotorClient(connection_string)
         self._database = self._client.belluga_solutions
         self._connection_request = ConnectionRequestMongoDB(self._database)
 
