@@ -3,3 +3,4 @@ uvicorn
 pydantic[email]
 python-decouple
 fastapi_utils
+motor
