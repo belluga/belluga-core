@@ -1,9 +1,6 @@
 from pkg_resources import resource_exists
 from setuptools import find_packages, setup
 
-import belluga
-from belluga import presentation
-from belluga.presentation import connect_api
 setup(name='belluga',
 version='0.5',
 description='Testing installation of Package',
