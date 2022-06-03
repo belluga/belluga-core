@@ -10,5 +10,4 @@ author_email='elton@bellugasolutions.com',
 packages=find_packages(),
 include_package_data=True,
 # license='MIT',
-packages=['belluga'],
 zip_safe=False)
