@@ -4,11 +4,7 @@ from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
 from belluga.presentation.public_api.contracts.module_router import ModuleRouter
 from belluga.infrastructure.dal.contracts.filter_object import FilterObject
-
-from belluga.application.common.models import (
-    ResponseModel,
-    ErrorResponseModel
-)
+from belluga.application.common.models.response_model import ResponseModel
 
 router = InferringRouter()
 tags = ["ConnectionRequests"]
@@ -27,7 +23,8 @@ class ConnectionRequestRoute(ModuleRouter):
 
     @staticmethod
     def include_routes(api: FastAPI):
-        api.include_router(router, tags=ConnectionRequestRoute.tags, prefix=ConnectionRequestRoute.prefix)
+        api.include_router(router, tags=ConnectionRequestRoute.tags,
+                           prefix=ConnectionRequestRoute.prefix)
 
     @router.post("/{connection_id}", status_code=201, response_description="Connection Request added into the database")
     async def insert(self, connection_id: str, body: dict = Body(...)):
@@ -50,21 +47,21 @@ class ConnectionRequestRoute(ModuleRouter):
             page = page_minimum_value
 
         filter = FilterObject(
-            status= status,
-            since = since,
-            until= until,
-            connection_id= connection_id,
+            status=status,
+            since=since,
+            until=until,
+            connection_id=connection_id,
             page=page,
             items_per_page=items_per_page
         )
         new_connection_request = await self.connection.connection_request_get_many(filter)
         self._close()
         return ResponseModel(
-            data= new_connection_request,
+            data=new_connection_request,
             message="Connection Request list find successfully.",
             count=len(new_connection_request),
             page=page
-            )
+        )
 
     @router.get("/{request_id}", status_code=200, response_description="Return a specific request.")
     async def getOne(self, request_id: str):
@@ -73,10 +70,12 @@ class ConnectionRequestRoute(ModuleRouter):
         return ResponseModel(new_connection_request, "Connection Request list find successfully.")
 
     async def delete(self):
-        raise Exception("ConnectionRequestRoute don't have 'delete' implemented")
-    
+        raise Exception(
+            "ConnectionRequestRoute don't have 'delete' implemented")
+
     async def update(self):
-        raise Exception("ConnectionRequestRoute don't have 'update' implemented")
+        raise Exception(
+            "ConnectionRequestRoute don't have 'update' implemented")
 
     def _close(self):
         self.connection.close()
