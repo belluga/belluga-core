@@ -1,6 +1,6 @@
 from setuptools import setup
 setup(name='belluga',
-version='0.2',
+version='0.3',
 description='Testing installation of Package',
 url='#',
 author='auth',
