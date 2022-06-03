@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from infrastructure.dal.contracts.filter_object import FilterObject
+from belluga.infrastructure.dal.contracts.filter_object import FilterObject
 
 class DataObject(ABC):
 

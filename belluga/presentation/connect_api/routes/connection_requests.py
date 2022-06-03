@@ -3,7 +3,7 @@ from fastapi import Body, FastAPI
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
 from belluga.presentation.public_api.contracts.module_router import ModuleRouter
-from infrastructure.dal.contracts.filter_object import FilterObject
+from belluga.infrastructure.dal.contracts.filter_object import FilterObject
 
 from application.common.models import (
     ResponseModel,

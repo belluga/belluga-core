@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod, abstractproperty
 from fastapi import Body, FastAPI
 from fastapi_utils.inferring_router import InferringRouter
 from fastapi_utils.cbv import cbv
-from infrastructure.dal.contracts.belluga_connect_factory import BellugaConnectFactory
+from belluga.infrastructure.dal.contracts.belluga_connect_factory import BellugaConnectFactory
 
 from fastapi import FastAPI
 

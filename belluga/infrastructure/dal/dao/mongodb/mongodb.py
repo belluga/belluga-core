@@ -1,8 +1,8 @@
 from decouple import config
 import motor.motor_asyncio as motor
-from infrastructure.dal.dao.mongodb.connection_request_mongodb import ConnectionRequestMongoDB
-from infrastructure.dal.contracts.belluga_connect import BellugaConnect
-from infrastructure.dal.contracts.filter_object import FilterObject
+from belluga.infrastructure.dal.dao.mongodb.connection_request_mongodb import ConnectionRequestMongoDB
+from belluga.infrastructure.dal.contracts.belluga_connect import BellugaConnect
+from belluga.infrastructure.dal.contracts.filter_object import FilterObject
 
 
 class MongoDBDao(BellugaConnect):

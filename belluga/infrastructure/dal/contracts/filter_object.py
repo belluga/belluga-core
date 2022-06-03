@@ -1,7 +1,7 @@
 from datetime import datetime
 import inspect
 
-from infrastructure.dal.contracts.filter_item import FilterItem
+from belluga.infrastructure.dal.contracts.filter_item import FilterItem
 
 
 class FilterObject():

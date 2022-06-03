@@ -1,4 +1,4 @@
-from infrastructure.dal.dao.mongodb.mongodb import MongoDBDao
+from belluga.infrastructure.dal.dao.mongodb.mongodb import MongoDBDao
 
 
 class BellugaConnectFactory():
