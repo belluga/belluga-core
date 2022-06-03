@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from presentation.connect_api.routes.connection_requests import ConnectionRequestRoute
+from belluga.presentation.connect_api.routes.connection_requests import ConnectionRequestRoute
 
 class BellugaAPI():
     
