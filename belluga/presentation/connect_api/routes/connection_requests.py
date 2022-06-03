@@ -18,9 +18,6 @@ class ConnectionRequestRoute(ModuleRouter):
     prefix = prefix
     router = router
 
-    def __init__(self):
-        super().__init__()
-
     @staticmethod
     def include_routes(api: FastAPI):
         api.include_router(router, tags=ConnectionRequestRoute.tags,
