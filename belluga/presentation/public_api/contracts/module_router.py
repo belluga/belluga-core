@@ -24,7 +24,6 @@ class ModuleRouter(ABC):
         self.tags = ModuleRouter.tags
         self.prefix = ModuleRouter.prefix
 
-    @abstractmethod
     def set_connection(self, connection: BellugaConnectFactory):
         self.connection = connection
 
