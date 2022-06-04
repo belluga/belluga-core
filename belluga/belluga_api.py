@@ -9,8 +9,13 @@ class BellugaAPI():
     def __init__(self, db_type: str, db_settings: dict):
         self.api = FastAPI()
         self.connection = BellugaConnectFactory.get_client(db_type, db_settings)
-        self.connection_request = ConnectionRequestRoute()
-        self.connection_request.set_connection(self.connection)
+        self.include_routes()
 
     def include_routes(self):
-        self.connection_request.include_routes(self.api)
+        self._include_route_connection_request()
+        
+
+    def _include_route_connection_request(self):
+        self.connection_request = ConnectionRequestRoute()
+        self.connection_request.set_connection(self.connection)
+        ConnectionRequestRoute.include_routes(self.api)
