@@ -26,10 +26,6 @@ class ModuleRouter(ABC):
         self.connection = connection
 
     @abstractmethod
-    def set_connection(self, connection: BellugaConnectFactory):
-        pass
-
-    @abstractmethod
     async def getOne(self, request_id: str):
         pass
 
