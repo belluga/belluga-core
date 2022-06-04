@@ -20,9 +20,10 @@ class ModuleRouter(ABC):
     def router(self) -> InferringRouter:
         ...
 
-    def __init__(self):
+    def __init__(self, connection):
         self.tags = ModuleRouter.tags
         self.prefix = ModuleRouter.prefix
+        self.connection = connection
 
     @abstractmethod
     def set_connection(self, connection: BellugaConnectFactory):

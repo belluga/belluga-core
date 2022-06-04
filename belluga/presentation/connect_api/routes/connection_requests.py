@@ -2,6 +2,7 @@ from datetime import datetime
 from fastapi import Body, FastAPI
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
+from belluga.infrastructure.dal.contracts.belluga_connect import BellugaConnect
 from belluga.infrastructure.dal.contracts.belluga_connect_factory import BellugaConnectFactory
 from belluga.presentation.public_api.contracts.module_router import ModuleRouter
 from belluga.infrastructure.dal.contracts.filter_object import FilterObject
@@ -23,9 +24,6 @@ class ConnectionRequestRoute(ModuleRouter):
     def include_routes(api: FastAPI):
         api.include_router(router, tags=ConnectionRequestRoute.tags,
                            prefix=ConnectionRequestRoute.prefix)
-
-    def set_connection(self, connection: BellugaConnectFactory):
-        self.connection = connection
 
     @router.post("/{connection_id}", status_code=201, response_description="Connection Request added into the database")
     async def insert(self, connection_id: str, body: dict = Body(...)):

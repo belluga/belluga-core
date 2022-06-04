@@ -16,6 +16,6 @@ class BellugaAPI():
         
 
     def _include_route_connection_request(self):
-        self.connection_request = ConnectionRequestRoute()
-        self.connection_request.set_connection(self.connection)
+        self.connection_request = ConnectionRequestRoute(self.connection)
+        # self.connection_request.set_connection(self.connection)
         ConnectionRequestRoute.include_routes(self.api)
