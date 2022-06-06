@@ -1,4 +1,3 @@
-from belluga.belluga import Belluga
 from belluga.infrastructure.dal.contracts.belluga_connect_factory import BellugaConnectFactory
 
 

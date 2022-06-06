@@ -1,5 +1,4 @@
 from datetime import datetime
-import inspect
 
 from belluga.infrastructure.dal.contracts.filter_item import FilterItem
 

@@ -1,5 +1,0 @@
-fastapi
-uvicorn
-python-decouple
-fastapi_utils
-motor

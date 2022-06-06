@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from fastapi_utils.inferring_router import InferringRouter
-from belluga.belluga import Belluga
 
 class ModuleRouter(ABC):
 

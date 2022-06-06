@@ -2,8 +2,6 @@ from datetime import datetime
 from bson.objectid import ObjectId
 from belluga.infrastructure.dal.entities.connection_request import ConnectionRequestsModel
 from belluga.infrastructure.dal.contracts.data_object import DataObject
-from belluga.infrastructure.dal.contracts.filter_object import FilterObject
-import inspect
 
 
 class ConnectionRequestMongoDB(DataObject):
