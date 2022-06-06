@@ -9,8 +9,8 @@ class BellugaConnection(object):
             print("__new__")
             cls.instance = super().__new__(cls)
 
-        print(cls.instance)
-        return cls.instance
+            print(cls.instance)
+            return cls.instance
 
     def __init__(self, db_type: str = None, db_settings: dict = None):
         print("db_type")
