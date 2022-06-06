@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from fastapi_utils.inferring_router import InferringRouter
+from belluga.belluga import Belluga
 from belluga.belluga_connection import BellugaConnection
 
 class ModuleRouter(ABC):
@@ -9,7 +10,7 @@ class ModuleRouter(ABC):
         ...
 
     def __init__(self):
-        self.belluga_connection = BellugaConnection.instance()
+        self.belluga = Belluga.instance()
         print("__init__ ModuleRouter")
         print(self.belluga_connection)
 
