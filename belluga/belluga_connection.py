@@ -8,6 +8,6 @@ class BellugaConnection(object):
             cls.instance = super().__new__(cls)
             return cls.instance
 
-    def __init__(self, db_type: str, db_settings: dict):
+    def __init__(self, db_type: str = None, db_settings: dict = None):
         self.connection = BellugaConnectFactory.get_client(
             db_type, db_settings)
