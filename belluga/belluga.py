@@ -11,4 +11,4 @@ class Belluga:
 
     def set_api(self):
         self.api = BellugaAPI.instance()
-        self.routes = BellugaRoutes()
+        # self.routes = BellugaRoutes()
