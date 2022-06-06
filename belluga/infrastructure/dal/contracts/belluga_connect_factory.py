@@ -12,6 +12,6 @@ class BellugaConnectFactory():
         print(_belluga_settings)
         if(_belluga_settings.db_settings["type"] == "mongodb"):
             print("will return")
-            return MongoDBDao(_belluga_settings.db_settings.settings["connection_string"])
+            return MongoDBDao(_belluga_settings.db_settings["settings"]["connection_string"])
         
         print("will not return")
