@@ -7,8 +7,10 @@ class BellugaAPI():
     def __new__(cls, *args, **kwargs):
         print("check instance")
         if not hasattr(cls, "instance") or not cls.instance:
+            print("__new__")
             cls.instance = super().__new__(cls)
         
+        print(cls.instance)
         return cls.instance
 
     def __init__(self):
