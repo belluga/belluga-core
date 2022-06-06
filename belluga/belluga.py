@@ -3,9 +3,9 @@ from belluga.infrastructure.dal.contracts.belluga_connect_factory import Belluga
 
 class Belluga(object):
     
-    def __new__(cls, db_type: str, db_settings: dict):
+    def __new__(cls, *args, **kwargs):
         if not hasattr(cls, "instance") or not cls.instance:
-            cls.instance = super().__new__(cls, db_type, db_settings)
+            cls.instance = super().__new__(cls)
             return cls.instance
 
     def __init__(self, db_type: str, db_settings: dict):
