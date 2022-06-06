@@ -13,6 +13,8 @@ class BellugaConnection(object):
             return cls.instance
 
     def __init__(self, db_type: str = None, db_settings: dict = None):
+        print("BellugaConnect")
+        print("__init__")
         print("db_type")
         print(db_type)
         print("db_settings")
