@@ -1,7 +1,7 @@
 from belluga.infrastructure.dal.contracts.belluga_connect_factory import BellugaConnectFactory
 
 
-class BellugaConnection(object):
+class BellugaConnection():
     
     def __new__(cls, *args, **kwargs):
         print("check instance")
