@@ -46,9 +46,6 @@ class ConnectionRequestRoute(ModuleRouter):
         )
 
         _belluga_connection = BellugaConnection()
-        print("pre")
-        print(self.belluga_connection)
-        print(self.belluga_connection.connection)
 
         new_connection_request = await _belluga_connection.connection.connection_request_get_many(filter)
         self._close()
