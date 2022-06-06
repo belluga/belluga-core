@@ -9,8 +9,6 @@ class ModuleRouter(ABC):
         ...
 
     def __init__(self):
-        self.tags = ModuleRouter.tags
-        self.prefix = ModuleRouter.prefix
         self.belluga_connection = BellugaConnection()
 
     @abstractmethod
