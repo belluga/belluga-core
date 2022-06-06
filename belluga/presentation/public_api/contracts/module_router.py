@@ -10,6 +10,8 @@ class ModuleRouter(ABC):
 
     def __init__(self):
         self.belluga_connection = BellugaConnection()
+        print("__init__ ModuleRouter")
+        print(self.belluga_connection)
 
     @abstractmethod
     async def getOne(self, request_id: str):
