@@ -26,6 +26,11 @@ class ModuleRouter(ABC):
         self.tags = ModuleRouter.tags
         self.prefix = ModuleRouter.prefix
         self.belluga = Belluga()
+        self.include_routes()
+
+    def include_routes(self):
+        self.belluga.api.include_router(self.router, tags=self.tags,
+                           prefix=self.prefix)
 
     @abstractmethod
     async def getOne(self, request_id: str):

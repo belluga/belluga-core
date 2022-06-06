@@ -20,11 +20,6 @@ class ConnectionRequestRoute(ModuleRouter):
     prefix = prefix
     router = router
 
-    @staticmethod
-    def include_routes(api: FastAPI):
-        api.include_router(router, tags=ConnectionRequestRoute.tags,
-                           prefix=ConnectionRequestRoute.prefix)
-
     @router.post("/{connection_id}", status_code=201, response_description="Connection Request added into the database")
     async def insert(self, connection_id: str, body: dict = Body(...)):
         new_connection_request = await self.belluga.connection.connection_request_insert(connection_id, body)
