@@ -3,11 +3,11 @@ class Singleton:
     def __init__(self, cls):
         self._cls = cls
 
-    def instance(self):
+    def instance(self, *args, **kwargs):
         try:
             return self._instance
         except AttributeError:
-            self._instance = self._cls()
+            self._instance = self._cls(args, kwargs)
             return self._instance
 
     def __call__(self):
