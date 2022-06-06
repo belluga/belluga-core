@@ -5,7 +5,7 @@ from belluga.infrastructure.dal.dao.mongodb.mongodb import MongoDBDao
 class BellugaConnectFactory():
 
     @staticmethod
-    def get_client(type: str, settings: dict) -> BellugaConnect:
+    def get_client(type: str, settings: dict):
         print("get_client")
         print(type)
         print(settings)
