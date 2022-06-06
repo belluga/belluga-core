@@ -1,9 +1,7 @@
 from datetime import datetime
-from fastapi import Body, FastAPI
+from fastapi import Body
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
-from belluga.infrastructure.dal.contracts.belluga_connect import BellugaConnect
-from belluga.infrastructure.dal.contracts.belluga_connect_factory import BellugaConnectFactory
 from belluga.presentation.public_api.contracts.module_router import ModuleRouter
 from belluga.infrastructure.dal.contracts.filter_object import FilterObject
 from belluga.application.common.models.response_model import ResponseModel

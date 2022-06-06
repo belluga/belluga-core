@@ -11,3 +11,13 @@ class BellugaAPI():
 
     def __init__(self):
         self.api = FastAPI()
+        self.include_routes()
+
+
+    def include_routes(self):
+        self._include_route_connection_request()
+        
+
+    def _include_route_connection_request(self):
+        self.connection_request = ConnectionRequestRoute()
+        self.api.include_router(self.connection_request.router, tags=self.connection_request.tags, prefix=self.connection_request.prefix)
