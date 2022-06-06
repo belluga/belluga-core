@@ -24,3 +24,6 @@ class MongoDBDao(BellugaConnect):
     async def connection_request_get_many(self, filter: FilterObject) -> list:
         _result = await self._connection_request.find(filter)
         return _result
+
+    async def watch_collection(self, collection: str, match: dict = {}):
+        return self._database.get_collection(collection).watch(match)
