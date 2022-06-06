@@ -5,14 +5,6 @@ from belluga.belluga_connection import BellugaConnection
 class ModuleRouter(ABC):
 
     @abstractmethod
-    def tags(self) -> list[str]:
-        pass
-
-    @abstractmethod
-    def prefix(self) -> str:
-        pass
-
-    @abstractmethod
     def router(self) -> InferringRouter:
         ...
 
@@ -40,7 +32,3 @@ class ModuleRouter(ABC):
     @abstractmethod
     async def update(self):
         pass
-
-    # @abstractmethod
-    # async def insert(self, connection_id: str, body: dict = Body(...)):
-    #     pass
