@@ -27,7 +27,7 @@ class ConnectionRequestRoute(ModuleRouter):
 
     @router.post("/{connection_id}", status_code=201, response_description="Connection Request added into the database")
     async def insert(self, connection_id: str, body: dict = Body(...)):
-        new_connection_request = await self.connection.connection_request_insert(connection_id, body)
+        new_connection_request = await self.belluga.connection.connection_request_insert(connection_id, body)
         self._close()
         return ResponseModel(new_connection_request, "Connection Request added successfully.")
 
@@ -53,7 +53,8 @@ class ConnectionRequestRoute(ModuleRouter):
             page=page,
             items_per_page=items_per_page
         )
-        new_connection_request = await self.connection.connection_request_get_many(filter)
+
+        new_connection_request = await self.belluga.connection.connection_request_get_many(filter)
         self._close()
         return ResponseModel(
             data=new_connection_request,
@@ -64,7 +65,7 @@ class ConnectionRequestRoute(ModuleRouter):
 
     @router.get("/{request_id}", status_code=200, response_description="Return a specific request.")
     async def getOne(self, request_id: str):
-        new_connection_request = await self.connection.connection_request_get(request_id)
+        new_connection_request = await self.belluga.connection.connection_request_get(request_id)
         self._close()
         return ResponseModel(new_connection_request, "Connection Request list find successfully.")
 
@@ -77,4 +78,5 @@ class ConnectionRequestRoute(ModuleRouter):
             "ConnectionRequestRoute don't have 'update' implemented")
 
     def _close(self):
-        self.connection.close()
+        _belluga = self.belluga()
+        _belluga.connection.close()
