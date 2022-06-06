@@ -7,7 +7,7 @@ class Singleton:
         try:
             return self._instance
         except AttributeError:
-            self._instance = self._cls(args, kwargs)
+            self._instance = self._cls(argas=args, kwargs=kwargs)
             return self._instance
 
     def __call__(self):
