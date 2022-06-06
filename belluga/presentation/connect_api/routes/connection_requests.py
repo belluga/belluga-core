@@ -2,6 +2,8 @@ from datetime import datetime
 from fastapi import Body
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
+from belluga.belluga_connection import BellugaConnection
+from belluga.infrastructure.dal.contracts.belluga_connect import BellugaConnect
 from belluga.presentation.public_api.contracts.module_router import ModuleRouter
 from belluga.infrastructure.dal.contracts.filter_object import FilterObject
 from belluga.application.common.models.response_model import ResponseModel
@@ -16,7 +18,8 @@ class ConnectionRequestRoute(ModuleRouter):
 
     @router.post("/{connection_id}", status_code=201, response_description="Connection Request added into the database")
     async def insert(self, connection_id: str, body: dict = Body(...)):
-        new_connection_request = await self.belluga.connection.connection_request_insert(connection_id, body)
+        _belluga_connection = BellugaConnection()
+        new_connection_request = await _belluga_connection.connection.connection_request_insert(connection_id, body)
         self._close()
         return ResponseModel(new_connection_request, "Connection Request added successfully.")
 
@@ -43,11 +46,12 @@ class ConnectionRequestRoute(ModuleRouter):
             items_per_page=items_per_page
         )
 
+        _belluga_connection = BellugaConnection()
         print("pre")
         print(self.belluga_connection)
         print(self.belluga_connection.connection)
 
-        new_connection_request = await self.belluga.connection.connection_request_get_many(filter)
+        new_connection_request = await _belluga_connection.connection.connection_request_get_many(filter)
         self._close()
         return ResponseModel(
             data=new_connection_request,
@@ -58,7 +62,9 @@ class ConnectionRequestRoute(ModuleRouter):
 
     @router.get("/{request_id}", status_code=200, response_description="Return a specific request.")
     async def getOne(self, request_id: str):
-        new_connection_request = await self.belluga.connection.connection_request_get(request_id)
+        _belluga_connection = BellugaConnection()
+
+        new_connection_request = await _belluga_connection.connection.connection_request_get(request_id)
         self._close()
         return ResponseModel(new_connection_request, "Connection Request list find successfully.")
 
@@ -71,4 +77,5 @@ class ConnectionRequestRoute(ModuleRouter):
             "ConnectionRequestRoute don't have 'update' implemented")
 
     def _close(self):
-        self.belluga.connection.close()
+        _belluga_connection = BellugaConnection()
+        _belluga_connection.connection.connection.close()
