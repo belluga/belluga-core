@@ -2,9 +2,8 @@ from abc import ABC, abstractmethod, abstractproperty
 from fastapi import Body, FastAPI
 from fastapi_utils.inferring_router import InferringRouter
 from fastapi_utils.cbv import cbv
-from belluga.belluga import Belluga
-from belluga.infrastructure.dal.contracts.belluga_connect import BellugaConnect
-from belluga.infrastructure.dal.contracts.belluga_connect_factory import BellugaConnectFactory
+from belluga.belluga_api import BellugaAPI
+from belluga.belluga_connection import Belluga, BellugaConnection
 
 from fastapi import FastAPI
 
@@ -25,11 +24,12 @@ class ModuleRouter(ABC):
     def __init__(self):
         self.tags = ModuleRouter.tags
         self.prefix = ModuleRouter.prefix
-        self.belluga = Belluga()
+        self.belluga_connection = BellugaConnection()
+        self.belluga_api = BellugaAPI()
         self.include_routes()
 
     def include_routes(self):
-        self.belluga.api.include_router(self.router, tags=self.tags,
+        self.belluga_api.api.include_router(self.router, tags=self.tags,
                            prefix=self.prefix)
 
     @abstractmethod
