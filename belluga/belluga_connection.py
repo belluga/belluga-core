@@ -19,3 +19,4 @@ class BellugaConnection(object):
         print(db_settings)
         self.connection = BellugaConnectFactory.get_client(
             db_type, db_settings)
+        print(self.connection)
