@@ -7,15 +7,11 @@ from belluga.infrastructure.dal.contracts.filter_object import FilterObject
 from belluga.application.common.models.response_model import ResponseModel
 
 router = InferringRouter()
-tags = ["ConnectionRequests"]
-prefix = "/connection_requests"
 
 
 @cbv(router)
 class ConnectionRequestRoute(ModuleRouter):
 
-    tags = tags
-    prefix = prefix
     router = router
 
     @router.post("/{connection_id}", status_code=201, response_description="Connection Request added into the database")
