@@ -11,6 +11,6 @@ class Belluga:
     def set_connection(self, connection: BellugaConnect):
         self.connection = connection
 
-    def set_api(self):
-        self.api = BellugaAPI.instance()
-        self.routes = BellugaRoutes()
+    # def set_api(self):
+    #     self.api = BellugaAPI.instance()
+    #     self.routes = BellugaRoutes()
