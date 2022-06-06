@@ -9,13 +9,5 @@ class BellugaAPI():
             cls.instance = super().__new__(cls)
             return cls.instance
 
-    def __init__(self, db_type: str, db_settings: dict):
+    def __init__(self):
         self.api = FastAPI()
-
-    def include_routes(self):
-        self._include_route_connection_request()
-        
-
-    def _include_route_connection_request(self):
-        self.connection_request = ConnectionRequestRoute()
-        ConnectionRequestRoute.include_routes(self.api)
