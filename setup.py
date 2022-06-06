@@ -1,4 +1,3 @@
-from pkg_resources import resource_exists
 from setuptools import find_packages, setup
 
 setup(name='belluga',
