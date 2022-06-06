@@ -10,10 +10,10 @@ packages=find_packages(),
 include_package_data=True,
 zip_safe=False,
 install_requires=[
-"<fastapi>",
-"<uvicorn>",
-"<python-decouple>",
-"<fastapi_utils>",
-"<motor>"
+    "<fastapi>;python_version<'<0.78.0>'",
+    "<uvicorn>;python_version<'<0.17.6>'",
+    "<python-decouple>;python_version<'<3.6>'",
+    "<fastapi_utils>;python_version<'<0.2.1>'",
+    "<motor>;python_version<'<3.0.0>'"
  ]
 )
