@@ -74,4 +74,4 @@ class ConnectionRequestRoute(ModuleRouter):
 
     def _close(self):
         _belluga_connection = BellugaConnection()
-        _belluga_connection.connection.connection.close()
+        _belluga_connection.connection.close()
