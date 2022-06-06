@@ -16,5 +16,5 @@ install_requires=[
 "<python-decouple>",
 "<fastapi_utils>",
 "<motor>"
- ] 
+ ]
 )
