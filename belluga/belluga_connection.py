@@ -1,16 +1,9 @@
+from belluga.application.common.classes.singleton import Singleton
 from belluga.infrastructure.dal.contracts.belluga_connect_factory import BellugaConnectFactory
 
 
-class BellugaConnection():
-    
-    def __new__(cls, *args, **kwargs):
-        print("check instance")
-        if not hasattr(cls, "instance") or not cls.instance:
-            print("__new__")
-            cls.instance = super().__new__(cls)
-
-            print(cls.instance)
-            return cls.instance
+@Singleton
+class BellugaConnection(object):
 
     def __init__(self, db_type: str = None, db_settings: dict = None):
         print("BellugaConnect")
