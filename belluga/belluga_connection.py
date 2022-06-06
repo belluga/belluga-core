@@ -13,5 +13,9 @@ class BellugaConnection(object):
         return cls.instance
 
     def __init__(self, db_type: str = None, db_settings: dict = None):
+        print("db_type")
+        print(db_type)
+        print("db_settings")
+        print(db_settings)
         self.connection = BellugaConnectFactory.get_client(
             db_type, db_settings)
