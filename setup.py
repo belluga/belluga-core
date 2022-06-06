@@ -2,7 +2,7 @@ from pkg_resources import resource_exists
 from setuptools import find_packages, setup
 
 setup(name='belluga',
-version='0.36',
+version='0.37',
 description='Testing installation of Package',
 url='#',
 author='auth',
