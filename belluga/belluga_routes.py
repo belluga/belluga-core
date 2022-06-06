@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from belluga.belluga_api import BellugaAPI
 from belluga.presentation.connect_api.routes.connection_requests import ConnectionRequestRoute
 
 
