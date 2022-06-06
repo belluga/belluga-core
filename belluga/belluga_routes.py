@@ -4,10 +4,10 @@ from belluga.presentation.connect_api.routes.connection_requests import Connecti
 
 class BellugaRoutes():
     
-    def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, "instance") or not cls.instance:
-            cls.instance = super().__new__(cls)
-            return cls.instance
+    # def __new__(cls, *args, **kwargs):
+    #     if not hasattr(cls, "instance") or not cls.instance:
+    #         cls.instance = super().__new__(cls)
+    #         return cls.instance
 
     def __init__(self):
         self.api = BellugaAPI()
