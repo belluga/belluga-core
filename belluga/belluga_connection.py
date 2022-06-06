@@ -6,4 +6,3 @@ class BellugaConnection(object):
 
     def __init__(self):
         self.connection = BellugaConnectFactory.get_client()
-        print(self.connection)

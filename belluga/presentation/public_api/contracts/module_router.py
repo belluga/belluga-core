@@ -7,12 +7,7 @@ class ModuleRouter(ABC):
     @abstractmethod
     def router(self) -> InferringRouter:
         ...
-
-    # def __init__(self):
-    #     self.belluga = Belluga.instance()
-    #     print("__init__ ModuleRouter")
-    #     print(self.belluga_connection)
-
+        
     @abstractmethod
     async def getOne(self, request_id: str):
         pass
