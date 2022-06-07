@@ -23,13 +23,13 @@ class DataObject(ABC):
         _page_multiplier = self.filter.page - 1
         self.items_to_skip = _page_multiplier * self.filter.items_per_page
 
-    async def find(self, filter: FilterObject):
+    def find(self, filter: FilterObject):
         self.filter = filter
         self.match = self._build_match()
 
         _results_cursor = self._find()
         _result_documents: list = []
-        async for document in _results_cursor:
+        for document in _results_cursor:
             _result_documents.append(self.entitie_class.helper(document))
 
         return _result_documents
