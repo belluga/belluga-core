@@ -16,14 +16,14 @@ class ConnectionRequestRoute(ModuleRouter):
     router = router
 
     @router.post("/{connection_id}", status_code=201, response_description="Connection Request added into the database")
-    async def insert(self, connection_id: str, body: dict = Body(...)):
+    def insert(self, connection_id: str, body: dict = Body(...)):
         _belluga_connection = BellugaConnection()
-        new_connection_request = await _belluga_connection.connection.connection_request_insert(connection_id, body)
+        new_connection_request = _belluga_connection.connection.connection_request_insert(connection_id, body)
         self._close()
         return ResponseModel(new_connection_request, "Connection Request added successfully.")
 
     @router.get("/", status_code=200, response_description="Return a list of the requests")
-    async def getMany(
+    def getMany(
         self,
         status: str = None,
         since: datetime = None,
@@ -47,7 +47,7 @@ class ConnectionRequestRoute(ModuleRouter):
 
         _belluga_connection = BellugaConnection()
 
-        new_connection_request = await _belluga_connection.connection.connection_request_get_many(filter)
+        new_connection_request = _belluga_connection.connection.connection_request_get_many(filter)
         self._close()
         return ResponseModel(
             data=new_connection_request,
@@ -57,18 +57,18 @@ class ConnectionRequestRoute(ModuleRouter):
         )
 
     @router.get("/{request_id}", status_code=200, response_description="Return a specific request.")
-    async def getOne(self, request_id: str):
+    def getOne(self, request_id: str):
         _belluga_connection = BellugaConnection()
 
-        new_connection_request = await _belluga_connection.connection.connection_request_get(request_id)
+        new_connection_request = _belluga_connection.connection.connection_request_get(request_id)
         self._close()
         return ResponseModel(new_connection_request, "Connection Request list find successfully.")
 
-    async def delete(self):
+    def delete(self):
         raise Exception(
             "ConnectionRequestRoute don't have 'delete' implemented")
 
-    async def update(self):
+    def update(self):
         raise Exception(
             "ConnectionRequestRoute don't have 'update' implemented")
 

@@ -8,21 +8,21 @@ class ModuleRouter(ABC):
         ...
         
     @abstractmethod
-    async def getOne(self, request_id: str):
+    def getOne(self, request_id: str):
         pass
 
     @abstractmethod
-    async def getMany(self):
+    def getMany(self):
         pass
 
     @abstractmethod
-    async def insert(self):
+    def insert(self):
         pass
 
     @abstractmethod
-    async def delete(self):
+    def delete(self):
         pass
 
     @abstractmethod
-    async def update(self):
+    def update(self):
         pass
