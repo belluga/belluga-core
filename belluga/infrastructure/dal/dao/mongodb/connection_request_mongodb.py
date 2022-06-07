@@ -13,7 +13,7 @@ class ConnectionRequestMongoDB(DataObject):
         self.connection_requests_collection = self.database.get_collection(
             "connect_connection_requests")
 
-    async def insert(self, connection_id: str, connection_request_data: dict) -> dict:
+    def insert(self, connection_id: str, connection_request_data: dict) -> dict:
         connection_id = ObjectId(connection_id)
         connection_request: ConnectionRequestsModel = {
             "payload": connection_request_data,
@@ -23,19 +23,19 @@ class ConnectionRequestMongoDB(DataObject):
             "connection_id": connection_id
         }
 
-        connection_request_result = await self.connection_requests_collection.insert_one(connection_request)
+        connection_request_result = self.connection_requests_collection.insert_one(connection_request)
 
         return {
             "connection_request_id": str(connection_request_result.inserted_id)
         }
 
-    async def findOne(self, request_id: str) -> ConnectionRequestsModel:
+    def findOne(self, request_id: str) -> ConnectionRequestsModel:
         match = {"_id": ObjectId(request_id)}
 
         _results_cursor = self.connection_requests_collection.find(match)
 
         _result_documents: list = []
-        async for document in _results_cursor:
+        for document in _results_cursor:
             _request_model = ConnectionRequestsModel.helper(document)
             _result_documents.append(_request_model)
 

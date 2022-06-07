@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(name='belluga',
-version='1.1.0',
+version='1.1.1',
 description='Testing installation of Package',
 url='#',
 author='auth',
@@ -14,6 +14,6 @@ install_requires=[
     "uvicorn>=0.17.6",
     "python-decouple>=3.6",
     "fastapi_utils>=0.2.1",
-    "motor>=3.0.0"
+    "pymongo[srv]>=4.1.1"
  ]
 )
