@@ -1,7 +1,7 @@
 import asyncio
 
 
-class BellugaLoop():
+class BellugaLoop(object):
 
     def __init__(self, loop):
         self.start_loop(loop)
