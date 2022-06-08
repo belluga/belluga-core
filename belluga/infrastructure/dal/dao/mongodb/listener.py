@@ -23,7 +23,7 @@ class Listener(ABC):
         self.update_listen()
 
     @abstractmethod
-    def _on_change(self, *args, **kwargs):
+    def _on_change(self, document: dict):
         pass
 
     def update_listen(self):
@@ -35,5 +35,5 @@ class Listener(ABC):
 
     def _update_listener(self):
         _belluga_solutions = BellugaConnection()
-        for document in _belluga_solutions.connection.watch_collection(self._collection_str, self._pipeline):
-            self._on_change(doc=document)
+        for change in _belluga_solutions.connection.watch_collection(self._collection_str, self._pipeline):
+            self._on_change(document=change)

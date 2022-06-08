@@ -11,26 +11,22 @@ class ConnectionRequestListener(Listener):
     _collection_str = "connect_connection_requests"
     _pipeline = []
 
-    def _on_change(self, *args, ** kwargs):
+    def _on_change(self, document: dict):
         print("_on_change")
         print(self.__class__)
-        print(args)
-        print(kwargs)
+        print(document)
+        self.document = document
+        if(document["operationType"] == "update"):
+            self._on_update(self)
 
-    # def __init__(self, start_loop_callable):
-    #     self.start_loop_callable = start_loop_callable
-    #     self.update_listen()
+    def _on_update(self):
+        print("is update")
+        print(self.document)
 
-    # def update_listen(self):
-    #     print("update_listen")
-    #     self.update_loop = asyncio.new_event_loop()
-    #     self.update_loop.call_soon_threadsafe(self._update_listener)
-    #     t = Thread(target=self.start_loop_callable, args=(self.update_loop,))
-    #     t.start()
-    #     time.sleep(0.25)
-
-    # def _update_listener(self):
-    #     print("_update_listener")
-    #     _belluga_solutions = BellugaConnection()
-    #     for document in _belluga_solutions.connection.watch_collection(self._collection_str):
-    #         print(document)
+    def _on_delete(self):
+        print("is_delete")
+        print(self.document)
+        
+    def _on_create(self):
+        print("is_create")
+        print(self.document)
