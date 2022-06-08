@@ -22,4 +22,5 @@ class ConnectionRequestListener():
     def _update_listener(self):
         print("_update_listener")
         _belluga_solutions = BellugaConnection()
-        _belluga_solutions.connection.watch_collection(self._collection_str)
+        for document in _belluga_solutions.connection.watch_collection(self._collection_str):
+            print(document)
