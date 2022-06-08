@@ -22,8 +22,11 @@ class Listener(ABC):
         self.start_loop_callable = start_loop_callable
         self.update_listen()
 
+    @abstractmethod
+    def _on_change(self, *args, **kwargs):
+        pass
+
     def update_listen(self):
-        print("update_listen")
         self.update_loop = asyncio.new_event_loop()
         self.update_loop.call_soon_threadsafe(self._update_listener)
         t = Thread(target=self.start_loop_callable, args=(self.update_loop,))
@@ -31,7 +34,6 @@ class Listener(ABC):
         time.sleep(0.25)
 
     def _update_listener(self):
-        print("_update_listener")
         _belluga_solutions = BellugaConnection()
         for document in _belluga_solutions.connection.watch_collection(self._collection_str, self._pipeline):
-            print(document)
+            self._on_change(doc=document)

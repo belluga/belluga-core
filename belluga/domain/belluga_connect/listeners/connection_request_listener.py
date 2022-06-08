@@ -1,3 +1,4 @@
+from ast import arg
 import asyncio
 from threading import Thread
 import time
@@ -9,6 +10,12 @@ class ConnectionRequestListener(Listener):
 
     _collection_str = "connect_connection_requests"
     _pipeline = []
+
+    def _on_change(self, *args, ** kwargs):
+        print("_on_change")
+        print(self.__class__)
+        print(args)
+        print(kwargs)
 
     # def __init__(self, start_loop_callable):
     #     self.start_loop_callable = start_loop_callable
