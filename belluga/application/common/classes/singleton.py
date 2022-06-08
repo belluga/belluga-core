@@ -1,8 +1,12 @@
-class Singleton:
+from abc import ABC, abstractmethod
+
+
+class Singleton(ABC):
 
     def __init__(self, cls):
         self._cls = cls
 
+    @abstractmethod
     def instance(self):
         try:
             return self._instance

@@ -1,7 +1,9 @@
 from belluga.application.common.classes.singleton import Singleton
 
-@Singleton
-class BellugaSettings(object):
+class BellugaSettings(Singleton):
+
+    def instance(self):
+        return super().instance()
 
     def set_db(self, db_settings: dict):
         self.db_settings = db_settings
