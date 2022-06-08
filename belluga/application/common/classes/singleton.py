@@ -8,11 +8,7 @@ class Singleton(ABC):
 
     @abstractmethod
     def instance(self):
-        try:
-            return self._instance
-        except AttributeError:
-            self._instance = self._cls()
-            return self._instance
+        pass 
 
     def __call__(self):
         raise TypeError('Singletons must be accessed through `instance()`.')
