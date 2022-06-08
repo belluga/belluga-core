@@ -4,8 +4,7 @@ from belluga.domain.belluga_connect.listeners.connection_request_listener import
 
 class BellugaListener(object):
 
-    def __init__(self, loop):
-        self.start_loop(loop)
+    def __init__(self):
         self.connection_request = ConnectionRequestListener(self.start_loop)
     
     # @staticmethod
