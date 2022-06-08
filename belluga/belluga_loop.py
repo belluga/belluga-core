@@ -3,7 +3,8 @@ import asyncio
 
 class BellugaLoop(object):
 
-    def __init__(self, loop):
+    def __init__(self, cls, loop):
+        self._cls = cls
         self.start_loop(loop)
 
     def instance(self, loop):
