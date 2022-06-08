@@ -3,8 +3,8 @@ import asyncio
 
 @Singleton
 class BellugaLoop:
-    def __init__(self):
-        self.start_loop()
+    def __init__(self,loop):
+        self.start_loop(loop)
     
     def start_loop(self, loop):
         asyncio.set_event_loop(loop)
