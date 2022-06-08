@@ -16,6 +16,10 @@ class BellugaConnect(ABC):
     async def connection_request_get_many(self, filter: Union[dict, None]) -> list:
         pass
 
+    @abstractmethod
+    def watch_collection(self, collection: str, match: dict = {}):
+        pass
+
     # @abstractmethod
     # def connection_requests_helper(self, connection_request) -> dict:
     #     pass

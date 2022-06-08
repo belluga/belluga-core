@@ -5,3 +5,4 @@ class BellugaConnection(object):
 
     def __init__(self):
         self.connection = BellugaConnectFactory.get_client()
+        self.database = self.connection
