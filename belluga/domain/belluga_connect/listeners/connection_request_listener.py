@@ -17,7 +17,7 @@ class ConnectionRequestListener(Listener):
         print(document)
         self.document = document
         if(document["operationType"] == "update"):
-            self._on_update(self)
+            self._on_update()
 
     def _on_update(self):
         print("is update")
