@@ -25,5 +25,5 @@ class MongoDBDao(BellugaConnect):
         _result = self._connection_request.find(filter)
         return _result
 
-    def watch_collection(self, collection: str, match: dict = {}):
+    def watch_collection(self, collection: str, match: list[dict] = []):
         return self._database.get_collection(collection).watch(match)
