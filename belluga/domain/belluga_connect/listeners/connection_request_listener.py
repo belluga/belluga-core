@@ -1,32 +1,58 @@
-from ast import arg
-import asyncio
-from threading import Thread
-import time
-from belluga.belluga_connection import BellugaConnection
 from belluga.infrastructure.dal.dao.mongodb.listener import Listener
 
 
 class ConnectionRequestListener(Listener):
 
     _collection_str = "connect_connection_requests"
-    _pipeline = []
+    _pipeline = [
+        {
+            "$match": {
+                "updateDescription.updatedFields.status": {
+                    "$exists": True
+                }
+            }
+        }
+    ]
 
     def _on_change(self, document: dict):
-        print("_on_change")
-        print(self.__class__)
-        print(document)
         self.document = document
-        if(document["operationType"] == "update"):
-            self._on_update()
+        self.status = document["updateDescription"]["updatedFields"]["status"]
+        if(self.status == "received"):
+            self._process_received()
 
-    def _on_update(self):
-        print("is update")
+        if(self.status == "error"):
+            self._process_error()
+
+        if(self.status == "ready"):
+            self._process_ready()
+
+        if(self.status == "retry"):
+            self._process_retry()
+
+        if(self.status == "processed"):
+            self._process_processed()
+
+    def _process_received(self):
+        print("is received")
+        # Should call domain
         print(self.document)
 
-    def _on_delete(self):
-        print("is_delete")
+    def _process_error(self):
+        print("is error")
+        # Should call domain
         print(self.document)
-        
-    def _on_create(self):
-        print("is_create")
+
+    def _process_ready(self):
+        print("is ready")
+        # Should call domain
+        print(self.document)
+
+    def _process_retry(self):
+        print("is retry")
+        # Should call domain
+        print(self.document)
+
+    def _process_processed(self):
+        print("is processed")
+        # Should call domain
         print(self.document)
