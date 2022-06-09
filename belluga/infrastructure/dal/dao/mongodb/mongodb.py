@@ -26,4 +26,4 @@ class MongoDBDao(BellugaConnect):
         return _result
 
     def watch_collection(self, collection: str, match: list[dict] = []):
-        return self._database.get_collection(collection).watch(match)
+        return self._database.get_collection(collection).watch(match, full_document="updateLookup")

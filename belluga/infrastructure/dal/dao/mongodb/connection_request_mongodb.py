@@ -1,6 +1,6 @@
 from datetime import datetime
 from bson.objectid import ObjectId
-from belluga.infrastructure.dal.entities.connection_request import ConnectionRequestsModel
+from belluga.domain.belluga_connect.models.connection_request_model import ConnectionRequestsModel
 from belluga.infrastructure.dal.contracts.data_object import DataObject
 
 

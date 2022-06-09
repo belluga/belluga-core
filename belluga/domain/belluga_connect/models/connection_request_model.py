@@ -1,26 +1,23 @@
-# import asyncio
-# from threading import Thread
-# import time
+from datetime import datetime
 
-# from belluga.belluga_connection import BellugaConnection
+from pydantic import BaseModel, Field
 
 
-# class ConnectionRequestModel():
-#     def __init__(self, start_loop: asyncio.AbstractEventLoop):
-#         self.start_loop = start_loop
+class ConnectionRequestModel(BaseModel):
+    id: str = None
+    time: datetime = Field(...)
+    payload: dict = Field(...)
+    status: str = Field(...)
+    connection_id: str = Field(...)
+    attempts: int = Field(..., GtE=0)
 
-
-#     def set_update_loop(self):
-#         self.update_loop = asyncio.new_event_loop()
-#         self.update_loop.call_soon_threadsafe(self.on_change)
-#         t = Thread(target=self.start_loop, args=(self.update_loop))
-#         t.start()
-#         time.sleep(0.25)
-
-#     def on_change(self):
-#         print("have changed")
-#         _belluga_connection = BellugaConnection()
-        
-#         for document in _belluga_connection.connection.watch():
-#             print(document)
-
+    @staticmethod
+    def helper(connection_request) -> dict:
+        return ConnectionRequestModel(
+            id=str(connection_request["_id"]),
+            time=connection_request["time"],
+            payload=dict(connection_request["payload"]),
+            status=str(connection_request["status"]),
+            connection_id=str(connection_request["connection_id"]),
+            attempts=int(connection_request["attempts"])
+        )

@@ -1,4 +1,6 @@
+from belluga.domain.belluga_connect.models.connection_request_model import ConnectionRequestModel
 from belluga.infrastructure.dal.dao.mongodb.listener import Listener
+from belluga.domain.belluga_connect.belluga_connect_domain import BellugaConnectDomain
 
 
 class ConnectionRequestListener(Listener):
@@ -15,44 +17,21 @@ class ConnectionRequestListener(Listener):
     ]
 
     def _on_change(self, document: dict):
-        self.document = document
+        self.request: ConnectionRequestModel = ConnectionRequestModel.helper(document["full_document"])
         self.status = document["updateDescription"]["updatedFields"]["status"]
+
+        self.connect_domain: BellugaConnectDomain = BellugaConnectDomain(self.request)
         if(self.status == "received"):
-            self._process_received()
+            self.connect_domain.process_received()
 
         if(self.status == "error"):
-            self._process_error()
+            self.connect_domain.process_error()
 
         if(self.status == "ready"):
-            self._process_ready()
+            self.connect_domain.process_ready()
 
         if(self.status == "retry"):
-            self._process_retry()
+            self.connect_domain.process_retry()
 
         if(self.status == "processed"):
-            self._process_processed()
-
-    def _process_received(self):
-        print("is received")
-        # Should call domain
-        print(self.document)
-
-    def _process_error(self):
-        print("is error")
-        # Should call domain
-        print(self.document)
-
-    def _process_ready(self):
-        print("is ready")
-        # Should call domain
-        print(self.document)
-
-    def _process_retry(self):
-        print("is retry")
-        # Should call domain
-        print(self.document)
-
-    def _process_processed(self):
-        print("is processed")
-        # Should call domain
-        print(self.document)
+            self.connect_domain.process_processed()
