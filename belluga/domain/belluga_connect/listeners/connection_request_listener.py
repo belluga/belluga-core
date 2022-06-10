@@ -26,19 +26,19 @@ class ConnectionRequestListener(Listener):
         self._get_data_from_change(document)
 
         self.connect_domain: BellugaConnectDomain = BellugaConnectDomain(self.request)
-        if(self.status == "received"):
+        if(self.request.status == "received"):
             self._process_received()
 
-        if(self.status == "error"):
+        if(self.request.status == "error"):
             self._process_error()
 
-        if(self.status == "ready"):
+        if(self.request.status == "ready"):
             self._process_ready()
 
-        if(self.status == "retry"):
+        if(self.request.status == "retry"):
             self._process_retry()
 
-        if(self.status == "processed"):
+        if(self.request.status == "processed"):
             self._process_processed()
 
     def _process_received(self):
