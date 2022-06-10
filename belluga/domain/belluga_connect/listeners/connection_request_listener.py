@@ -19,8 +19,8 @@ class ConnectionRequestListener(Listener):
     def _get_data_from_change(self, change: dict):
         self.change = change
         self.request: ConnectionRequestModel = ConnectionRequestModel.helper(self.change["fullDocument"])
-        print(self.request["status"])
-        print(self.request["_id"])
+        print(self.request.status)
+        print(self.request.id)
 
     def _on_change(self, document: dict):
         self._get_data_from_change(document)
