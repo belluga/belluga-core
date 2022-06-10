@@ -8,7 +8,7 @@ class BellugaConnectDomain():
 
     def counter_success_increment(self, increment_value: int = 1):
         print(self.request.counter)
-        self.request.counter["success"] = self.request.counter["success"] + increment_value
+        self.request.counter["processed"] = self.request.counter["processed"] + increment_value
         print(self.request.counter)
 
     def save(self):
