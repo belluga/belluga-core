@@ -10,11 +10,6 @@ class Listener(ABC):
 
     @property
     @abstractmethod
-    def _model_class() -> str:
-        pass
-
-    @property
-    @abstractmethod
     def _collection_str() -> str:
         pass
 
