@@ -1,7 +1,4 @@
 from datetime import datetime
-from django.db import connection
-from psycopg2 import connect
-
 from pydantic import BaseModel, Field
 
 
