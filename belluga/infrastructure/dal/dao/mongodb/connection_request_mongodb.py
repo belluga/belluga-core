@@ -1,12 +1,12 @@
 from datetime import datetime
 from bson.objectid import ObjectId
-from belluga.domain.belluga_connect.models.connection_request_model import ConnectionRequestsModel
+from belluga.domain.belluga_connect.models.connection_request_model import ConnectionRequestModel
 from belluga.infrastructure.dal.contracts.data_object import DataObject
 
 
 class ConnectionRequestMongoDB(DataObject):
 
-    entitie_class = ConnectionRequestsModel
+    entitie_class = ConnectionRequestModel
 
     def __init__(self, database):
         self.database = database
@@ -15,7 +15,7 @@ class ConnectionRequestMongoDB(DataObject):
 
     def insert(self, connection_id: str, connection_request_data: dict) -> dict:
         connection_id = ObjectId(connection_id)
-        connection_request: ConnectionRequestsModel = {
+        connection_request: ConnectionRequestModel = {
             "payload": connection_request_data,
             "time": datetime.utcnow(),
             "attempts": 0,
@@ -29,14 +29,14 @@ class ConnectionRequestMongoDB(DataObject):
             "connection_request_id": str(connection_request_result.inserted_id)
         }
 
-    def findOne(self, request_id: str) -> ConnectionRequestsModel:
+    def findOne(self, request_id: str) -> ConnectionRequestModel:
         match = {"_id": ObjectId(request_id)}
 
         _results_cursor = self.connection_requests_collection.find(match)
 
         _result_documents: list = []
         for document in _results_cursor:
-            _request_model = ConnectionRequestsModel.helper(document)
+            _request_model = ConnectionRequestModel.helper(document)
             _result_documents.append(_request_model)
 
         return _request_model
