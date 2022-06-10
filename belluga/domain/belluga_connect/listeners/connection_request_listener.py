@@ -17,7 +17,8 @@ class ConnectionRequestListener(Listener):
     ]
 
     def _on_change(self, document: dict):
-        self.request: ConnectionRequestModel = ConnectionRequestModel.helper(document["full_document"])
+        print(document)
+        self.request: ConnectionRequestModel = ConnectionRequestModel.helper(document["fullDocument"])
         self.status = document["updateDescription"]["updatedFields"]["status"]
 
         self.connect_domain: BellugaConnectDomain = BellugaConnectDomain(self.request)
