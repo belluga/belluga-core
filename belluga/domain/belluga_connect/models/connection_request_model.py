@@ -1,8 +1,6 @@
 from datetime import datetime
-from bson import ObjectId
 from pydantic import BaseModel, Field
 from belluga.application.common.enums.connection_request_status import ConnectionRequestStatus
-from belluga.belluga_connection import BellugaConnection
 
 
 class ConnectionRequestModel(BaseModel):
