@@ -19,18 +19,20 @@ class ConnectionRequestListener(Listener):
 
     def _get_data_from_change(self, change: dict):
         self.change = change
-        self.request: ConnectionRequestModel = ConnectionRequestModel.helper(self.change["fullDocument"])
+        self.request: ConnectionRequestModel = ConnectionRequestModel.helper(
+            self.change["fullDocument"])
         print(self.request.status)
         print(self.request.id)
 
     def _on_change(self, document: dict):
         self._get_data_from_change(document)
-        self.connect_domain: BellugaConnectDomain = BellugaConnectDomain(self.request)
+        self.connect_domain: BellugaConnectDomain = BellugaConnectDomain(
+            self.request)
 
         print(self.request.status)
         print(ConnectionRequestStatus.received)
         print(ConnectionRequestStatus.received.value)
-        if(self.request.status ==  ConnectionRequestStatus.received.value):
+        if(self.request.status == ConnectionRequestStatus.received.value):
             self._process_received()
 
         if(self.request.status == ConnectionRequestStatus.error.value):
@@ -51,39 +53,44 @@ class ConnectionRequestListener(Listener):
     def _process_received(self):
         print(self.__class__)
         print("will process the integration to get it ready")
-        #TODO: Check if it's a valid request, with proper data and connection
-        #TODO: Save the settings to run the integration on the document
-        #TODO: Update the connection as a +1 valid
-        #TODO: Update the status as 'ready'
-
+        # TODO: Check if it's a valid request, with proper data and connection
+        # TODO: Save the settings to run the integration on the document
+        # TODO: Update the connection as a +1 valid
+        # TODO: Update the status as 'ready'
+        self.connect_domain.status_update(
+            ConnectionRequestStatus.ready)
 
     def _process_retry(self):
         print(self.__class__)
         print("Will just call the 'process the same way as '_process_ready'")
-        #TODO: Run the integration
+        # TODO: Run the integration
+        self.connect_domain.run_integration()
 
     def _process_error(self):
         print(self.__class__)
         print("Update CONNECTOR with a +1 error")
-        self.connect_domain.counter_status_increment(ConnectionRequestStatus.error)
+        self.connect_domain.counter_status_increment(
+            ConnectionRequestStatus.error)
         print("We could check 'notifications rules' to see if we need to alert someone")
-        #TODO: We could check "notifications rules" to see if we need to alert someone
+        # TODO: We could check "notifications rules" to see if we need to alert someone
 
     def _process_invalid(self):
         print(self.__class__)
         print("Update CONNECTOR with a +1 invalid")
-        self.connect_domain.counter_status_increment(ConnectionRequestStatus.invalid)
+        self.connect_domain.counter_status_increment(
+            ConnectionRequestStatus.invalid)
         print("We could check 'notifications rules' to see if we need to alert someone")
-        #TODO: We could check "notifications rules" to see if we need to alert someone
+        # TODO: We could check "notifications rules" to see if we need to alert someone
 
     def _process_processed(self):
         print(self.__class__)
         print("Update CONNECTOR with a +1 success")
-        #TODO: Update CONNECTOR with a +1 success
-        self.connect_domain.counter_status_increment(ConnectionRequestStatus.processed)
-
+        # TODO: Update CONNECTOR with a +1 success
+        self.connect_domain.counter_status_increment(
+            ConnectionRequestStatus.processed)
 
     def _process_ready(self):
         print(self.__class__)
         print("will run the integration")
-        #TODO: Run the integration
+        # TODO: Run the integration
+        self.connect_domain.run_integration()

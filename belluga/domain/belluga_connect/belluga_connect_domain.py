@@ -8,6 +8,26 @@ class BellugaConnectDomain():
 
     def __init__(self, request: ConnectionRequestModel):
         self.request = request
+        self.connection = BellugaConnection()
+
+    def run_integration(self):
+        print("Run the integration")
+        # TODO: Run the integration
+
+    def status_update(self, status: ConnectionRequestStatus):
+        _match = self._build_match_id()
+        _set = self._status_update_build_set(status)
+        self.connection.connection.update(
+            self.request.collection, _match, _set)
+
+    def _status_update_build_set(self, status: ConnectionRequestStatus) -> dict:
+        _set = {
+            "$set": {
+                "status": status.value
+            }
+        }
+
+        return _set
 
     def counter_status_increment(self, status: ConnectionRequestStatus, increment_value: int = 1):
         _set = self._counter_status_increment_build_set(
@@ -39,8 +59,7 @@ class BellugaConnectDomain():
 
     def _save_parent(self, set: dict):
         _match = self._build_parent_match_id()
-        _belluga_connection = BellugaConnection()
-        _belluga_connection.connection.update(
+        self.connection.connection.update(
             self.request.parent_collection, _match, set)
 
     def _save(self):
