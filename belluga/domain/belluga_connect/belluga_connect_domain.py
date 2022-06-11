@@ -9,7 +9,9 @@ class BellugaConnectDomain():
 
     def counter_status_increment(self, status: ConnectionRequestStatus, increment_value: int = 1):
         print(self.request.counter)
-        self.request.counter[status.value] = self.request.counter[status.value] + increment_value
+
+        # self.request.counter[status.value] = self.request.counter[status.value] + increment_value
+        self.request.counter_status_increment(status, increment_value)
         print(self.request.counter)
 
     def save(self):
