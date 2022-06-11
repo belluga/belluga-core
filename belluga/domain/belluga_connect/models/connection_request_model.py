@@ -28,10 +28,10 @@ class ConnectionRequestModel(BaseModel):
             connection_id=str(connection_request["connection_id"]),
             attempts=int(connection_request["attempts"]),
             counter=dict(connection_request.get("counter", {
-                ConnectionRequestStatus.processed: 0,
-                ConnectionRequestStatus.error: 0,
-                ConnectionRequestStatus.invalid: 0,
-                ConnectionRequestStatus.received: 0
+                ConnectionRequestStatus.processed.value: 0,
+                ConnectionRequestStatus.error.value: 0,
+                ConnectionRequestStatus.invalid.value: 0,
+                ConnectionRequestStatus.received.value: 0
             }))
         )
 
@@ -42,7 +42,7 @@ class ConnectionRequestModel(BaseModel):
     def _counter_status_increment_build_set(self, status: ConnectionRequestStatus, increment_value: int = 1) -> dict:
         _set = {
             "$inc": {
-                "counter."+status: increment_value
+                "counter."+status.value: increment_value
             }
         }
 
