@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(name='belluga',
-version='1.3.18',
+version='1.3.19',
 description='Testing installation of Package',
 url='#',
 author='auth',

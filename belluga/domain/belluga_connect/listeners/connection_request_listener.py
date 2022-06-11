@@ -80,7 +80,7 @@ class ConnectionRequestListener(Listener):
         print(self.__class__)
         print("Update CONNECTOR with a +1 success")
         #TODO: Update CONNECTOR with a +1 success
-        self.connect_domain.counter_success_increment()
+        self.connect_domain.counter_status_increment(ConnectionRequestStatus.processed)
 
 
     def _process_ready(self):
