@@ -38,37 +38,3 @@ class ConnectionRequestModel(BaseModel):
                 ConnectionRequestStatus.received.value: 0
             }))
         )
-
-    def counter_status_increment(self, status: ConnectionRequestStatus, increment_value: int = 1):
-        _set = self._counter_status_increment_build_set(
-            status, increment_value)
-        self._save_parent(_set)
-
-    def _counter_status_increment_build_set(self, status: ConnectionRequestStatus, increment_value: int = 1) -> dict:
-        _set = {
-            "$inc": {
-                "counter."+status.value: increment_value
-            }
-        }
-
-        return _set
-
-    def _build_match_id(self) -> dict:
-        _match = {
-            '_id': ObjectId(self.id)
-        }
-
-        return _match
-
-    def _build_parent_match_id(self) -> dict:
-        _match = {
-            '_id': ObjectId(self.connection_id)
-        }
-
-        return _match
-
-    def _save_parent(self, set: dict):
-        _match = self._build_parent_match_id()
-        _belluga_connection = BellugaConnection()
-        _belluga_connection.connection.update(
-            self.parent_collection, _match, set)
