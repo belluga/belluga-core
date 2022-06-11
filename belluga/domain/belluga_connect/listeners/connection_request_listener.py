@@ -65,14 +65,14 @@ class ConnectionRequestListener(Listener):
     def _process_error(self):
         print(self.__class__)
         print("Update CONNECTOR with a +1 error")
-        #TODO: Update CONNECTOR with a +1 error
+        self.connect_domain.counter_status_increment(ConnectionRequestStatus.error)
         print("We could check 'notifications rules' to see if we need to alert someone")
         #TODO: We could check "notifications rules" to see if we need to alert someone
 
     def _process_invalid(self):
         print(self.__class__)
         print("Update CONNECTOR with a +1 invalid")
-        #TODO: Update CONNECTOR with a +1 invalid
+        self.connect_domain.counter_status_increment(ConnectionRequestStatus.invalid)
         print("We could check 'notifications rules' to see if we need to alert someone")
         #TODO: We could check "notifications rules" to see if we need to alert someone
 

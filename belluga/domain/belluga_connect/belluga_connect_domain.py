@@ -25,7 +25,7 @@ class BellugaConnectDomain():
 
     def _build_match_id(self) -> dict:
         _match = {
-            '_id': ObjectId(self.id)
+            '_id': ObjectId(self.request.id)
         }
 
         return _match
