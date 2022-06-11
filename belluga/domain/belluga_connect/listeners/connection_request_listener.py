@@ -25,24 +25,27 @@ class ConnectionRequestListener(Listener):
 
     def _on_change(self, document: dict):
         self._get_data_from_change(document)
-
         self.connect_domain: BellugaConnectDomain = BellugaConnectDomain(self.request)
-        if(self.request.status ==  ConnectionRequestStatus.received):
+
+        print(self.request.status)
+        print(ConnectionRequestStatus.received)
+        print(ConnectionRequestStatus.received.value)
+        if(self.request.status ==  ConnectionRequestStatus.received.value):
             self._process_received()
 
-        if(self.request.status == ConnectionRequestStatus.error):
+        if(self.request.status == ConnectionRequestStatus.error.value):
             self._process_error()
 
-        if(self.request.status == ConnectionRequestStatus.invalid):
+        if(self.request.status == ConnectionRequestStatus.invalid.value):
             self._process_invalid()
 
-        if(self.request.status == ConnectionRequestStatus.ready):
+        if(self.request.status == ConnectionRequestStatus.ready.value):
             self._process_ready()
 
-        if(self.request.status == ConnectionRequestStatus.retry):
+        if(self.request.status == ConnectionRequestStatus.retry.value):
             self._process_retry()
 
-        if(self.request.status == ConnectionRequestStatus.processed):
+        if(self.request.status == ConnectionRequestStatus.processed.value):
             self._process_processed()
 
     def _process_received(self):
