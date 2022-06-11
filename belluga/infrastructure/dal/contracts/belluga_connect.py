@@ -20,6 +20,10 @@ class BellugaConnect(ABC):
     def watch_collection(self, collection: str, match: dict = {}):
         pass
 
+    @abstractmethod
+    def update(self, collection: str, match: dict, set: dict):
+        pass
+
     # @abstractmethod
     # def connection_requests_helper(self, connection_request) -> dict:
     #     pass
