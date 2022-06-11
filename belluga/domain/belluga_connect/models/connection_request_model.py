@@ -1,5 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
+from belluga.application.common.enums.connection_request_status import ConnectionRequestStatus
 
 
 class ConnectionRequestModel(BaseModel):
@@ -10,10 +11,10 @@ class ConnectionRequestModel(BaseModel):
     connection_id: str = Field(...)
     attempts: int = Field(..., GtE=0)
     counter: dict = {
-        "processed": 0,
-        "error": 0,
-        "invalid": 0,
-        "received": 0
+        ConnectionRequestStatus.processed: 0,
+        ConnectionRequestStatus.error: 0,
+        ConnectionRequestStatus.invalid: 0,
+        ConnectionRequestStatus.received: 0
     }
 
     @staticmethod
@@ -27,9 +28,22 @@ class ConnectionRequestModel(BaseModel):
             connection_id=str(connection_request["connection_id"]),
             attempts=int(connection_request["attempts"]),
             counter=dict(connection_request.get("counter", {
-                "processed": 0,
-                "error": 0,
-                "invalid": 0,
-                "received": 0
+                ConnectionRequestStatus.processed: 0,
+                ConnectionRequestStatus.error: 0,
+                ConnectionRequestStatus.invalid: 0,
+                ConnectionRequestStatus.received: 0
             }))
         )
+
+    def counter_status_increment(self, status: ConnectionRequestStatus, increment_value: int = 1):
+        _set = self._counter_status_increment_build_set(status, increment_value)
+        print(_set)
+
+    def _counter_status_increment_build_set(self, status: ConnectionRequestStatus, increment_value: int = 1) -> dict:
+        _set = {
+            "$inc": {
+                "counter."+status: increment_value
+            }
+        }
+
+        return _set

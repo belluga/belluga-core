@@ -1,6 +1,7 @@
 from belluga.domain.belluga_connect.models.connection_request_model import ConnectionRequestModel
 from belluga.infrastructure.dal.dao.mongodb.listener import Listener
 from belluga.domain.belluga_connect.belluga_connect_domain import BellugaConnectDomain
+from belluga.application.common.enums.connection_request_status import ConnectionRequestStatus
 
 
 class ConnectionRequestListener(Listener):
@@ -26,19 +27,22 @@ class ConnectionRequestListener(Listener):
         self._get_data_from_change(document)
 
         self.connect_domain: BellugaConnectDomain = BellugaConnectDomain(self.request)
-        if(self.request.status == "received"):
+        if(self.request.status ==  ConnectionRequestStatus.received):
             self._process_received()
 
-        if(self.request.status == "error"):
+        if(self.request.status == ConnectionRequestStatus.error):
             self._process_error()
 
-        if(self.request.status == "ready"):
+        if(self.request.status == ConnectionRequestStatus.invalid):
+            self._process_invalid()
+
+        if(self.request.status == ConnectionRequestStatus.ready):
             self._process_ready()
 
-        if(self.request.status == "retry"):
+        if(self.request.status == ConnectionRequestStatus.retry):
             self._process_retry()
 
-        if(self.request.status == "processed"):
+        if(self.request.status == ConnectionRequestStatus.processed):
             self._process_processed()
 
     def _process_received(self):
@@ -59,6 +63,13 @@ class ConnectionRequestListener(Listener):
         print(self.__class__)
         print("Update CONNECTOR with a +1 error")
         #TODO: Update CONNECTOR with a +1 error
+        print("We could check 'notifications rules' to see if we need to alert someone")
+        #TODO: We could check "notifications rules" to see if we need to alert someone
+
+    def _process_invalid(self):
+        print(self.__class__)
+        print("Update CONNECTOR with a +1 invalid")
+        #TODO: Update CONNECTOR with a +1 invalid
         print("We could check 'notifications rules' to see if we need to alert someone")
         #TODO: We could check "notifications rules" to see if we need to alert someone
 
