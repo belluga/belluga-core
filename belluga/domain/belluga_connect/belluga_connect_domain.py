@@ -11,8 +11,26 @@ class BellugaConnectDomain():
         self.connection = BellugaConnection()
 
     def run_integration(self):
+        print("increase attempts")
+        self._attempts_increment()
         print("Run the integration")
         # TODO: Run the integration
+
+    def _attempts_increment(self):
+        _set = self._attempts_increment_build_set()
+        _match = self._build_match_id()
+        self.connection.connection.update(
+            self.request.collection, _match, _set)
+
+
+    def _attempts_increment_build_set(self) -> dict:
+        _set = {
+            "$inc": {
+                "attempts": 1
+            }
+        }
+
+        return _set
 
     def status_update(self, status: ConnectionRequestStatus):
         _match = self._build_match_id()

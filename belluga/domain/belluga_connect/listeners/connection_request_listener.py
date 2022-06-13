@@ -41,8 +41,8 @@ class ConnectionRequestListener(Listener):
         if(self.request.status == ConnectionRequestStatus.invalid.value):
             self._process_invalid()
 
-        if(self.request.status == ConnectionRequestStatus.ready.value):
-            self._process_ready()
+        if(self.request.status == ConnectionRequestStatus.valid.value):
+            self._process_valid()
 
         if(self.request.status == ConnectionRequestStatus.retry.value):
             self._process_retry()
@@ -52,45 +52,45 @@ class ConnectionRequestListener(Listener):
 
     def _process_received(self):
         print(self.__class__)
-        print("will process the integration to get it ready")
+        print("will process the integration to prepare and validate request")
         # TODO: Check if it's a valid request, with proper data and connection
         # TODO: Save the settings to run the integration on the document
-        # TODO: Update the connection as a +1 valid
-        # TODO: Update the status as 'ready'
+        self.connect_domain.counter_status_increment(
+            ConnectionRequestStatus.valid)
+        
         self.connect_domain.status_update(
-            ConnectionRequestStatus.ready)
+            ConnectionRequestStatus.valid)
 
     def _process_retry(self):
         print(self.__class__)
-        print("Will just call the 'process the same way as '_process_ready'")
+        print("Will just call the 'process the same way as '_process_valid'")
         # TODO: Run the integration
         self.connect_domain.run_integration()
 
+        print("if the integreations runs correctly, then we will update to processed")
+        #if the integreations runs correctly, then we will update to processed
+        self.connect_domain.status_update(
+            ConnectionRequestStatus.processed)
+
     def _process_error(self):
-        print(self.__class__)
-        print("Update CONNECTOR with a +1 error")
         self.connect_domain.counter_status_increment(
             ConnectionRequestStatus.error)
-        print("We could check 'notifications rules' to see if we need to alert someone")
-        # TODO: We could check "notifications rules" to see if we need to alert someone
 
     def _process_invalid(self):
-        print(self.__class__)
-        print("Update CONNECTOR with a +1 invalid")
         self.connect_domain.counter_status_increment(
             ConnectionRequestStatus.invalid)
-        print("We could check 'notifications rules' to see if we need to alert someone")
-        # TODO: We could check "notifications rules" to see if we need to alert someone
 
     def _process_processed(self):
-        print(self.__class__)
-        print("Update CONNECTOR with a +1 success")
-        # TODO: Update CONNECTOR with a +1 success
         self.connect_domain.counter_status_increment(
             ConnectionRequestStatus.processed)
 
-    def _process_ready(self):
+    def _process_valid(self):
         print(self.__class__)
         print("will run the integration")
         # TODO: Run the integration
         self.connect_domain.run_integration()
+
+        print("if the integreations runs correctly, then we will update to processed")
+        #if the integreations runs correctly, then we will update to processed
+        self.connect_domain.status_update(
+            ConnectionRequestStatus.processed)
